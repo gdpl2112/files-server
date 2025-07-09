@@ -47,7 +47,9 @@ public class FileController {
                 name = DateUtils.getDay() + "-" + UUID.randomUUID();
                 if (Judge.isEmpty(suffix)){
                     String ifn = multipartFile.getOriginalFilename();
-                    suffix = ifn.substring(ifn.lastIndexOf("."));
+                    if (ifn != null) {
+                        suffix = ifn.substring(ifn.lastIndexOf("."));
+                    }
                 }
             }
             if (suffix != null) name = name + suffix;
