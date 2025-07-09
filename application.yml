@@ -1,0 +1,16 @@
+# 文件存储路径（根据系统调整）
+file:
+  upload-dir: ./files
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static,classpath:/dist,file:./files
+  resources:
+    static-locations: classpath:/static,classpath:/dist,file:./files
+  servlet:
+    multipart:
+      max-file-size: 10MB  # 单文件大小限制
+
+server:
+  host: http://127.0.0.1
+  port: 82
