@@ -78,6 +78,12 @@ public class FileController {
         }
     }
 
+    @GetMapping("/exits")
+    public boolean exits(@RequestParam String path) {
+        File file = new File(uploadDir, path);
+        return file.exists();
+    }
+
     @GetMapping("/ping")
     public String ping(){
         return "OK";
