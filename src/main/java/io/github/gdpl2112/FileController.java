@@ -77,4 +77,9 @@ public class FileController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/ping")
+    public String ping(){
+        return "OK";
+    }
 }
