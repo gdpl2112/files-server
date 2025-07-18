@@ -18,5 +18,6 @@ public class FileServerApplication {
         String pid = name.split("@")[0];
         FileUtils.putStringInFile(pid, new File("./fs.pid"));
         SpringApplication.run(FileServerApplication.class, args);
+        System.out.println("FileServerApplication started compile at 25/07/18");
     }
 }
