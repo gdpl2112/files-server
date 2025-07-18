@@ -4,12 +4,14 @@ import io.github.kloping.file.FileUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
 
 @SpringBootApplication
 @ServletComponentScan
+@CrossOrigin
 public class FileServerApplication {
     public static void main(String[] args) {
         String name = ManagementFactory.getRuntimeMXBean().getName();
