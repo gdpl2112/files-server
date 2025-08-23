@@ -17,7 +17,7 @@ public class LogFilter implements Filter {
         if (ip == null) ip = request.getRemoteAddr();
         ip = "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
         log.info("{}[{}]({})", ip, requestFacade.getMethod(), requestFacade.getRequestURL());
-        log.debug(JSON.toJSONString(request.getParameterMap()));
+//        log.debug(JSON.toJSONString(request.getParameterMap()));
         chain.doFilter(request, response);
     }
 }
