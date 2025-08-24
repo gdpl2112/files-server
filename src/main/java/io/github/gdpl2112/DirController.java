@@ -122,6 +122,7 @@ public class DirController {
             ahref.addClass(elFile.isDirectory() ? "folder" : "file");
             String href = elFile.isDirectory() ?
                     "/dir?path=" + fname : fname;
+            href = href.replaceAll("//", "/");
             ahref.attr("href", href);
             if (elFile.isFile()) ahref.attr("target", "_blank");
             ahref.text(elFile.getName());
