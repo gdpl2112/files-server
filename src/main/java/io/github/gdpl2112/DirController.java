@@ -79,6 +79,7 @@ public class DirController {
             "    <tbody>\n" +
             "    </tbody>\n" +
             "</table>\n" +
+            "<hr>\n" +
             "</body>\n" +
             "</html>";
 
@@ -96,7 +97,17 @@ public class DirController {
         Element element = document.getElementsByTag("h1").get(0);
         element.text(path);
         List<File> files = new LinkedList<>(Arrays.asList(Objects.requireNonNull(file.listFiles())));
-        files.sort(Comparator.comparing(c -> c.isDirectory() ? 1 : -1));
+        files.sort((f1,f2)->{
+            // 优先文件夹
+            if (f1.isDirectory() && !f2.isDirectory()) {
+                return -1;
+            } else if (!f1.isDirectory() && f2.isDirectory()) {
+                return 1;
+            } else {
+                // 都是文件夹或都是文件，按名称升序
+                return f1.getName().compareToIgnoreCase(f2.getName());
+            }
+        });
         if (!path.equals("/")) {
             Element el0 = new Element("tr");
             Element el1 = new Element("td");
@@ -104,7 +115,7 @@ public class DirController {
 
             Element ahref = new Element("a");
             ahref.attr("href", "/dir?path=" + getUpPath(path));
-            ahref.text("返回上一级");
+            ahref.text("../");
             el1.appendChild(ahref);
             el0.appendChild(el1);
 
@@ -147,7 +158,6 @@ public class DirController {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         response.setStatus(200);
-        response.setContentLength(sb.length());
         try {
             response.getWriter().write(sb);
             response.getWriter().flush();
