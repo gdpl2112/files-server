@@ -1,0 +1,10 @@
+### return code
+POST http://127.0.0.1:81/auth/app/authorize?
+    app_id=101026453&type=c
+    &redirect_uri=http://127.0.0.1:82/callback
+Authorization: 6ff7fe0a-934d-423f-a5e3-08b09b504a81
+
+### ###
+POST http://127.0.0.1:81/auth/app/user
+    ?app_secret=Ue7V4HmpMBXlQT2
+    &user_code=t8XBXrJsi3

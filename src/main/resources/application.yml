@@ -5,15 +5,22 @@ spring:
   web:
     resources:
       static-locations: classpath:/static,classpath:/dist,file:./files
-  resources:
-    static-locations: classpath:/static,classpath:/dist,file:./files
   servlet:
     multipart:
-      max-file-size: 10MB  # 单文件大小限制
+      max-file-size: 100MB  # 单文件大小限制
 
 server:
   host: http://127.0.0.1
   port: 82
+  # 固定服务器地址
+  auth-server: https://kloping.top/
+
+# 认证配置
+auth:
+  app-id: 101689742 # 申请的APPID
+  app-secret: FIpktt8AsZJrqgU #申请的secret
+  ## 你部署的服务器的地址
+  redirect-uri: https://file.kloping.top/auth/callback
 
 logging:
   pattern:
@@ -25,6 +32,8 @@ logging:
     # 输出的文件的路径
     path: logs
     # 限制日志文件的大小
-    max-size: 10MB
     # 日志的保存天数
-    max-history: 7
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

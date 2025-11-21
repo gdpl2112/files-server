@@ -7,6 +7,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
     @Bean
+    public FilterRegistrationBean<FileValidationFilter> fileValidationFilter() {
+        FilterRegistrationBean<FileValidationFilter> bean = new FilterRegistrationBean<>();
+        bean.setFilter(new FileValidationFilter());
+        bean.addUrlPatterns("/*"); // 只拦截下载请求
+        bean.setOrder(1); // 设置优先级高于日志过滤器
+        return bean;
+    }
+
+    @Bean
     public FilterRegistrationBean<LogFilter> logFilter() {
         FilterRegistrationBean<LogFilter> bean = new FilterRegistrationBean<>();
         bean.setFilter(new LogFilter());

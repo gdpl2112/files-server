@@ -1,3 +1,6 @@
+application-dev.yaml
+data
+run.cmd
 **/test
 logs
 fs.pid
