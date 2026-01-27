@@ -17,4 +17,4 @@ else
     mvn clean dependency:copy-dependencies -DoutputDirectory=libs compile
 fi
 
-java -Dfile.encoding=UTF-8 -classpath "./target/classes:./libs/*" io.github.gdpl2112.FileServerApplication
+java -Dfile.encoding=UTF-8 -Xmx200m -Xms100m -XX:MaxHeapSize=200m -XX:+UseG1GC -classpath "./target/classes:./libs/*" io.github.gdpl2112.FileServerApplication
