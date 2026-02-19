@@ -11,7 +11,7 @@ spring:
 
 server:
   host: http://127.0.0.1
-  port: 82
+  port: 1082
   # 固定服务器地址
   auth-server: https://kloping.top/
 
