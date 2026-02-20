@@ -17,8 +17,8 @@ server:
 
 # 认证配置
 auth:
-  app-id: 101689742 # 申请的APPID
-  app-secret: FIpktt8AsZJrqgU #申请的secret
+  app-id: 101610632 # 申请的APPID
+  app-secret: 6mpmwW1axbbxyIT #申请的secret
   ## 你部署的服务器的地址
   redirect-uri: https://file.kloping.top/auth/callback
 
