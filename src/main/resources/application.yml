@@ -13,7 +13,7 @@ server:
   host: http://127.0.0.1
   port: 82
   # 固定服务器地址
-  auth-server: https://kloping.top/
+  auth-server: https://kloping.top
 
 # 认证配置
 auth:
