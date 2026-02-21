@@ -49,7 +49,11 @@ func main() {
 
 	// 静态文件服务
 	router.Static("/static", "./static")
-	router.StaticFile("/", "./static/index.html")
+	// 添加上传目录的静态文件服务，映射到根路径
+	// 这样可以通过 / 路径直接访问上传的文件
+	router.Static("/", config.UploadDir)
+	// 确保首页仍然可以访问
+	router.StaticFile("/index.html", "./static/index.html")
 
 	// 启动服务器
 	addr := fmt.Sprintf("%s:%d", config.Host, config.Port)
