@@ -1,0 +1,16 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "application.yml"
+      },
+      {
+        "pattern": "static/.*"
+      },
+      {
+        "pattern": "templates/.*"
+      }
+    ]
+  },
+  "bundles": []
+}

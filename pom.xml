@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.5.9</version>
         <relativePath/>
     </parent>
     <groupId>io.github.gdpl2112</groupId>
@@ -14,12 +14,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.compilerVersion>8</maven.compiler.compilerVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <repositories>
@@ -59,4 +59,87 @@
             <version>1.17.2</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven 插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 配置生成原生镜像 -->
+                <configuration>
+                    <image>
+                        <builder>paketobuildpacks/builder-jammy-tiny:latest</builder>
+                        <env>
+                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                        </env>
+                    </image>
+                </configuration>
+            </plugin>
+
+            <!-- GraalVM Native Build Tools 插件 -->
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>0.11.0</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>build-native</id>
+                        <goals>
+                            <goal>compile-no-fork</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 跳过原生测试 -->
+                    <skipTests>true</skipTests>
+                    <!-- 输出详细日志 -->
+                    <verbose>true</verbose>
+                    <!-- 镜像名称 -->
+                    <imageName>${project.artifactId}</imageName>
+                    <!-- 构建参数 -->
+                    <buildArgs>
+                        <!-- 设置GC -->
+                        <buildArg>-H:+UseSerialGC</buildArg>
+                        <!-- 报告未识别的反射 -->
+                        <buildArg>-H:+ReportUnsupportedElementsAtRuntime</buildArg>
+                        <!-- 允许不安全的操作 -->
+                        <buildArg>--allow-incomplete-classpath</buildArg>
+                        <!-- 禁用 fallback -->
+                        <buildArg>--no-fallback</buildArg>
+                        <!-- 启用 HTTPS -->
+                        <buildArg>--enable-url-protocols=https</buildArg>
+                        <!-- 添加更多诊断信息 -->
+                        <buildArg>-H:+PrintClassInitialization</buildArg>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- 原生镜像构建专用profile -->
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

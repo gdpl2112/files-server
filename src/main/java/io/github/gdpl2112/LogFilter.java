@@ -1,9 +1,9 @@
 package io.github.gdpl2112;
 
+import jakarta.servlet.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.RequestFacade;
 
-import javax.servlet.*;
 import java.io.IOException;
 
 @Slf4j

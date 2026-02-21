@@ -2,13 +2,13 @@ package io.github.gdpl2112;
 
 import io.github.gdpl2112.model.User;
 import io.github.gdpl2112.service.AuthService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class AuthController {
      * @return 登录结果
      */
     @GetMapping("/callback")
-    public ResponseEntity<String> callback(@RequestParam("code") String code, HttpSession session,HttpServletResponse response) throws IOException {
+    public ResponseEntity<String> callback(@RequestParam("code") String code, HttpSession session, HttpServletResponse response) throws IOException {
         User user = authService.handleAuthCallback(code);
         if (user != null) {
             session.setAttribute("user", user);
