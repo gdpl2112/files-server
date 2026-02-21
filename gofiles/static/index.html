@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件服务器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .upload-form {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .links {
+            margin: 20px 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>文件服务器</h1>
+        <hr>
+        
+        <div class="links">
+            <p><a href="/dir">浏览文件</a></p>
+            <p><a href="/auth/login">登录</a></p>
+            <p><a href="/ping">健康检查</a></p>
+        </div>
+        
+        <div class="upload-form">
+            <h2>上传文件</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">选择文件:</label>
+                    <input type="file" id="file" name="file" required>
+                </div>
+                <div class="form-group">
+                    <label for="path">路径 (可选):</label>
+                    <input type="text" id="path" name="path" placeholder="例如: 2024_01">
+                </div>
+                <div class="form-group">
+                    <label for="name">文件名 (可选):</label>
+                    <input type="text" id="name" name="name" placeholder="例如: test">
+                </div>
+                <div class="form-group">
+                    <label for="suffix">后缀 (可选):</label>
+                    <input type="text" id="suffix" name="suffix" placeholder="例如: .txt">
+                </div>
+                <button type="submit">上传</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
