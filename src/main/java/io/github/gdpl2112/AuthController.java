@@ -35,7 +35,7 @@ public class AuthController {
      */
     @GetMapping("/login")
     public ResponseEntity<String> login(HttpServletResponse response) throws IOException {
-        String authorizeUrl = String.format("%s/authc?app_id=%s&redirect_uri=%s", authServerUrl, appId, redirectUri);
+        String authorizeUrl = String.format("%s/#/authc?app_id=%s&redirect_uri=%s", authServerUrl, appId, redirectUri);
         response.sendRedirect(authorizeUrl);
         return ResponseEntity.status(302).body(authorizeUrl);
     }
